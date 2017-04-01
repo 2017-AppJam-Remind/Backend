@@ -261,6 +261,7 @@ app.post('/get', function (req, res){
                 throw err
             }
             else if(result){
+                console.log('one')
                 res.json(result)
             }
             else {
@@ -278,6 +279,7 @@ app.post('/get', function (req, res){
                 throw err
             }
             else if(result){
+                console.log('two')
                 res.json(result)
             }
             else {
@@ -295,6 +297,7 @@ app.post('/get', function (req, res){
                 throw err
             }
             else if(result){
+                console.log('three')
                 res.json(result)
             }
             else {
