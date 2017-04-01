@@ -120,6 +120,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
         weather : req.param('weather'),
         memo : req.param('memo')
     };
+    console.log(params)
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new one({
         name : req.param('name'),
@@ -168,6 +169,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
         weather : req.param('weather'),
         memo : req.param('memo')
     };
+    console.log(params)
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new two({
         name : req.param('name'),
@@ -216,7 +218,8 @@ app.post('/three', threeupload.single('file'), function (req, res) {
         weather : req.param('weather'),
         memo : req.param('memo')
     };
-    const time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
+    console.log(params)
+    var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new three({
         name : req.param('name'),
         imageName : 'http://soylatte.kr:3000/three/'+threeimage+'.png',
