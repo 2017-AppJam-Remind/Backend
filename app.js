@@ -50,7 +50,7 @@ app.use('/one', express.static('one'));
 app.use('/two', express.static('two'));
 app.use('/three', express.static('three'));
 
-mongoose.connect("mongodb://localhost/2017_AppJam", function (err) {
+mongoose.connect("mongodb://localhost:28001/2017_AppJam", function (err) {
     if(err){
         console.log('DB Error!');
         throw err;
@@ -127,7 +127,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
         memo : body.memo
     })
     one.findOne({
-        imageName : req.file.originalname
+        filenumber : file.originalname
     }, function (err, result) {
         if(err){
             console.log('/ findOne Error!')
