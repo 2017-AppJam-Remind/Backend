@@ -47,7 +47,7 @@ app.use('/one', express.static('one'));
 app.use('/two', express.static('two'));
 app.use('/three', express.static('three'));
 
-mongoose.connect("mongodb://localhost:28001/2017_AppJam", function (err) {
+mongoose.connect("mongodb://localhost/2017_AppJam", function (err) {
     if(err){
         console.log('DB Error!');
         throw err;
@@ -118,7 +118,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new one({
         name : body.name,
-        imageName : 'one'+oneimage,
+        imageName : 'http://soylatte.kr:3000/one/one'+oneimage+'.png',
         time : time,
         whether : body.whether,
         memo : body.memo
@@ -164,7 +164,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new two({
         name : body.name,
-        imageName : 'two'+twoimage,
+        imageName : 'http://soylatte.kr:3000/two/'+twoimage+'.png',
         time : time,
         whether : body.whether,
         memo : body.memo
@@ -210,7 +210,7 @@ app.post('/three', threeupload.single('file'), function (req, res) {
     const time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new three({
         name : body.name,
-        imageName : 'three'+threeimage,
+        imageName : 'http://soylatte.kr:3000/three/'+threeimage+'.png',
         time : time,
         whether : body.whether,
         memo : body.memo
