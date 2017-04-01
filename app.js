@@ -47,7 +47,7 @@ app.use('/one', express.static('one'));
 app.use('/two', express.static('two'));
 app.use('/three', express.static('three'));
 
-mongoose.connect("mongodb://localhost:28001/2017_AppJam", function (err) {
+mongoose.connect("mongodb://localhost:27017/2017_AppJam", function (err) {
     if(err){
         console.log('DB Error!');
         throw err;
@@ -114,16 +114,19 @@ app.get('/three', function (req, res) {
 })
 
 app.post('/one', oneupload.single('file'), function (req, res) {
-    var body = req.body;
-    console.log(body)
     console.log(req.file)
+    var params = {
+        name : req.param('name'),
+        weather : req.param('weather'),
+        memo : req.param('memo')
+    };
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new one({
-        name : body.name,
+        name : req.param('name'),
         imageName : 'http://soylatte.kr:3000/one/one'+oneimage+'.png',
         time : time,
-        weather : body.weather,
-        memo : body.memo
+        weather : req.param('weather'),
+        memo : req.param('memo')
     })
     one.findOne({
         imageName : req.file.originalname
@@ -134,7 +137,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
         }
         else if(result){
             console.log('Already in Database')
-            res.json({
+            res.send(400, {
                 success : false,
                 message : "Already in Database"
             })
@@ -143,7 +146,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
             data.save(function (err) {
                 if(err){
                     console.log('save Error!')
-                    res.json({
+                    res.send(401, {
                         success : false,
                         message : "Save Error!"
                     })
@@ -151,10 +154,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
                 else {
                     console.log('one'+oneimage+' Save Success!')
                     oneimage++;
-                    res.json({
-                        success : true,
-                        message : "Save Success"
-                    })
+                    res.send(200, [req.file, params]);
                 }
             })
         }
@@ -162,16 +162,19 @@ app.post('/one', oneupload.single('file'), function (req, res) {
 })
 
 app.post('/two', twoupload.single('file'), function (req, res) {
-    var body = req.body;
-    console.log(body)
     console.log(req.file)
+    var params = {
+        name : req.param('name'),
+        weather : req.param('weather'),
+        memo : req.param('memo')
+    };
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new two({
-        name : body.name,
+        name : req.param('name'),
         imageName : 'http://soylatte.kr:3000/two/'+twoimage+'.png',
         time : time,
-        weather : body.weather,
-        memo : body.memo
+        weather : req.param('weather'),
+        memo : req.param('memo')
     })
     two.findOne({
         imageName : req.file.originalname
@@ -182,7 +185,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
         }
         else if(result){
             console.log('Already in Database')
-            res.json({
+            res.send(400, {
                 success : false,
                 message : "Already in Database"
             })
@@ -191,7 +194,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
             data.save(function (err) {
                 if(err){
                     console.log('save Error!')
-                    res.json({
+                    res.send(401, {
                         success : false,
                         message : "Save Error!"
                     })
@@ -199,10 +202,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
                 else {
                     console.log('two'+twoimage+' Save Success!')
                     twoimage++;
-                    res.json({
-                        success : true,
-                        message : "Save Success"
-                    })
+                    res.send(200, [req.file, params]);
                 }
             })
         }
@@ -210,16 +210,19 @@ app.post('/two', twoupload.single('file'), function (req, res) {
 })
 
 app.post('/three', threeupload.single('file'), function (req, res) {
-    const body = req.body;
-    console.log(body)
     console.log(req.file)
+    var params = {
+        name : req.param('name'),
+        weather : req.param('weather'),
+        memo : req.param('memo')
+    };
     const time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new three({
-        name : body.name,
+        name : req.param('name'),
         imageName : 'http://soylatte.kr:3000/three/'+threeimage+'.png',
         time : time,
-        weather : body.weather,
-        memo : body.memo
+        weather : req.param('weather'),
+        memo : req.param('memo')
     })
     three.findOne({
         imageName : req.file.originalname
@@ -230,7 +233,7 @@ app.post('/three', threeupload.single('file'), function (req, res) {
         }
         else if(result){
             console.log('Already in Database')
-            res.json({
+            res.send(400, {
                 success : false,
                 message : "Already in Database"
             })
@@ -239,7 +242,7 @@ app.post('/three', threeupload.single('file'), function (req, res) {
             data.save(function (err) {
                 if(err){
                     console.log('save Error!')
-                    res.json({
+                    res.send(401, {
                         success : false,
                         message : "Save Error!"
                     })
@@ -247,10 +250,7 @@ app.post('/three', threeupload.single('file'), function (req, res) {
                 else {
                     console.log('three'+threeimage+' Save Success!')
                     threeimage++;
-                    res.json({
-                        success : true,
-                        message : "Save Success"
-                    })
+                    res.send(200, [req.file, params]);
                 }
             })
         }
