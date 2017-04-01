@@ -13,8 +13,7 @@ const onestorage = multer.diskStorage({
         cb(null, 'one/')
     },
     filename: function (req, file, cb) {
-        cb(null, 'one'+(oneimage+1)+'.png')
-        oneimage++;
+        cb(null, 'one'+oneimage+'.png')
     }
 })
 
@@ -23,8 +22,7 @@ const twostorage = multer.diskStorage({
         cb(null, 'two/')
     },
     filename: function (req, file, cb) {
-        cb(null, 'two'+(twoimage+1)+'.png')
-        twoimage++;
+        cb(null, 'two'+twoimage+'.png')
     }
 })
 
@@ -33,8 +31,7 @@ const threestorage = multer.diskStorage({
         cb(null, 'three/')
     },
     filename: function (req, file, cb) {
-        cb(null, 'three'+(threeimage+1)+'.png')
-        threeimage++;
+        cb(null, 'three'+threeimage+'.png')
     }
 })
 
@@ -151,6 +148,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
                 }
                 else {
                     console.log('one'+oneimage+' Save Success!')
+                    oneimage++;
                     res.json({
                         success : true,
                         message : "Save Success"
@@ -196,6 +194,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
                 }
                 else {
                     console.log('two'+twoimage+' Save Success!')
+                    twoimage++;
                     res.json({
                         success : true,
                         message : "Save Success"
@@ -241,6 +240,7 @@ app.post('/three', threeupload.single('file'), function (req, res) {
                 }
                 else {
                     console.log('three'+threeimage+' Save Success!')
+                    threeimage++;
                     res.json({
                         success : true,
                         message : "Save Success"
