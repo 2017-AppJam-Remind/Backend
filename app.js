@@ -47,7 +47,7 @@ app.use('/one', express.static('one'));
 app.use('/two', express.static('two'));
 app.use('/three', express.static('three'));
 
-mongoose.connect("mongodb://localhost/2017_AppJam", function (err) {
+mongoose.connect("mongodb://localhost:28001/2017_AppJam", function (err) {
     if(err){
         console.log('DB Error!');
         throw err;
