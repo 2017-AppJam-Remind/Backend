@@ -47,7 +47,7 @@ app.use('/one', express.static('one'));
 app.use('/two', express.static('two'));
 app.use('/three', express.static('three'));
 
-mongoose.connect("mongodb://localhost:28001/2017_AppJam", function (err) {
+mongoose.connect("mongodb://localhost/2017_AppJam", function (err) {
     if(err){
         console.log('DB Error!');
         throw err;
@@ -67,7 +67,7 @@ var DataSchema = new schema({
     time : {
         type : String
     },
-    whether : {
+    weather : {
         type: String
     },
     memo : {
@@ -120,7 +120,7 @@ app.post('/one', oneupload.single('file'), function (req, res) {
         name : body.name,
         imageName : 'http://soylatte.kr:3000/one/one'+oneimage+'.png',
         time : time,
-        whether : body.whether,
+        weather : body.weather,
         memo : body.memo
     })
     one.findOne({
@@ -166,7 +166,7 @@ app.post('/two', twoupload.single('file'), function (req, res) {
         name : body.name,
         imageName : 'http://soylatte.kr:3000/two/'+twoimage+'.png',
         time : time,
-        whether : body.whether,
+        weather : body.weather,
         memo : body.memo
     })
     two.findOne({
@@ -212,7 +212,7 @@ app.post('/three', threeupload.single('file'), function (req, res) {
         name : body.name,
         imageName : 'http://soylatte.kr:3000/three/'+threeimage+'.png',
         time : time,
-        whether : body.whether,
+        weather : body.weather,
         memo : body.memo
     })
     three.findOne({
@@ -250,7 +250,3 @@ app.post('/three', threeupload.single('file'), function (req, res) {
         }
     })
 })
-
-
-
-
