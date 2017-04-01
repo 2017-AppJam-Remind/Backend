@@ -47,7 +47,7 @@ app.use('/one', express.static('one'));
 app.use('/two', express.static('two'));
 app.use('/three', express.static('three'));
 
-mongoose.connect("mongodb://localhost:28001/2017_AppJam", function (err) {
+mongoose.connect("mongodb://localhost/2017_AppJam", function (err) {
     if(err){
         console.log('DB Error!');
         throw err;
@@ -249,4 +249,60 @@ app.post('/three', threeupload.single('file'), function (req, res) {
             })
         }
     })
+})
+
+app.post('/get', function (req, res){
+    var body = req.body;
+    location : body.location
+    if(body.location == 'one'){
+        one.find({ }, function (err, result) {
+            if(err){
+                console.log('one Error!')
+                throw err
+            }
+            else if(result){
+                res.json(result)
+            }
+            else {
+                res.json({
+                    success : false,
+                    message : "Data Not Found"
+                })
+            }
+        })
+    }
+    else if(body.location == 'two'){
+        two.find({ }, function (err, result) {
+            if(err){
+                console.log('one Error!')
+                throw err
+            }
+            else if(result){
+                res.json(result)
+            }
+            else {
+                res.json({
+                    success : false,
+                    message : "Data Not Found"
+                })
+            }
+        })
+    }
+    else if(body.location == 'three'){
+        three.find({ }, function (err, result) {
+            if(err){
+                console.log('one Error!')
+                throw err
+            }
+            else if(result){
+                res.json(result)
+            }
+            else {
+                res.json({
+                    success : false,
+                    message : "Data Not Found"
+                })
+            }
+        })
+    }
 })
