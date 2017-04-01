@@ -115,6 +115,8 @@ app.get('/three', function (req, res) {
 
 app.post('/one', oneupload.single('file'), function (req, res) {
     var body = req.body;
+    console.log(body)
+    console.log(req.file)
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new one({
         name : body.name,
@@ -161,6 +163,8 @@ app.post('/one', oneupload.single('file'), function (req, res) {
 
 app.post('/two', twoupload.single('file'), function (req, res) {
     var body = req.body;
+    console.log(body)
+    console.log(req.file)
     var time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new two({
         name : body.name,
@@ -207,6 +211,8 @@ app.post('/two', twoupload.single('file'), function (req, res) {
 
 app.post('/three', threeupload.single('file'), function (req, res) {
     const body = req.body;
+    console.log(body)
+    console.log(req.file)
     const time = moment().format('YYYY년 MM월 DD일, h:mm:ss A');
     var data = new three({
         name : body.name,
