@@ -260,6 +260,8 @@ app.post('/three', threeupload.single('file'), function (req, res) {
     })
 })
 
+/*
+
 app.post('/get', function (req, res){
     var body = req.body;
     location : body.location
@@ -319,3 +321,23 @@ app.post('/get', function (req, res){
     }
 })
 
+*/
+app.get('/get', function (req, res) {
+    one.find({ }, function (err, result) {
+        if(err){
+            console.log('/get find Error!')
+            throw err
+        }
+        else if(result){
+            console.log('One Connect')
+            res.json(result)
+        }
+        else {
+            console.log('Not Founed Data')
+            res.json({
+                success : false,
+                message : "Data Not Found"
+            })
+        }
+    })
+})
